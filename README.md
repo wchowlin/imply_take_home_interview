@@ -22,8 +22,9 @@ This project is a coding exercise that combines city data from three different f
 
 You can install the required packages using pip:
 
-
+``` bash
 pip install pandas fastavro
+```
 
 ## Usage
 
@@ -32,7 +33,7 @@ pip install pandas fastavro
 
 2. **Run the Script**  
    Execute the `city_data_aggregator.py` script to process the data:
-
+   
    python city_data_aggregator.py
 
 3. **Generated Output**  
