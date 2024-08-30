@@ -34,8 +34,9 @@ pip install pandas fastavro
 2. **Run the Script**  
    Execute the `city_data_aggregator.py` script to process the data:
    
+   ``` bash
    python city_data_aggregator.py
-
+   ```
 3. **Generated Output**  
    The script will create a file named `combined_cities.csv` containing the combined and deduplicated city records, sorted alphabetically by city name. Additionally, the script will print the answers to the following questions in the console:
 
@@ -59,6 +60,7 @@ pip install pandas fastavro
 
 - **Optimize I/O Operations**: Implement chunk-based reading for large files to minimize memory usage.
 - **Parallel Processing**: Leverage multiprocessing to load and process files concurrently.
+- **Add Indexes**: Enable fast lookups and selection of data.
 
 ### Scalability for Larger Datasets
 

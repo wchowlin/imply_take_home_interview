@@ -54,7 +54,7 @@ def combine_city_lists(filenames):
         dataframes.append(df)
 
         combined_df = pd.concat(dataframes, ignore_index=True)
-        combined_df = combined_df.drop_duplicates(subset=['Name', 'CountryCode', 'Population'])
+        combined_df = combined_df.drop_duplicates(subset=['Name', 'CountryCode'])
         combined_df = combined_df.sort_values(by='Name')
 
     return combined_df
