@@ -69,6 +69,6 @@ if __name__ == '__main__':
     combined_df.to_csv('combined_cities.csv', index=False)
 
     # Answer the questions
-    print("Total rows:", combined_df.shape[0])
-    print("City with largest population:", combined_df.nlargest(1, 'Population')['Name'].values[0])
-    print("Total population of cities in Brazil:", combined_df[combined_df['CountryCode'] == 'BRA']['Population'].sum())
+    print(f"Total rows: {combined_df.shape[0]}")
+    print(f"City with largest population: {combined_df.nlargest(1, 'Population')['Name'].values[0]} with {combined_df.nlargest(1, 'Population')['Population'].values[0]} in population")
+    print(f"Total population of cities in Brazil: {combined_df[combined_df['CountryCode'] == 'BRA']['Population'].sum()}")
