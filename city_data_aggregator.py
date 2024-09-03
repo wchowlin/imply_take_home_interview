@@ -1,5 +1,6 @@
 import pandas as pd
 import fastavro, os
+import argparse
 
 def list_files_in_directory(directory):
     """Generates a list of file paths in the given directory.
@@ -32,6 +33,28 @@ def avro_dataframe(filename):
     df = pd.DataFrame(city_list)
     return df
 
+def csv_dataframe(filename):
+    """Read an csv file and convert it to DataFrame.
+
+    Args:
+    filename: A name of an csv file.
+
+    Returns:
+    A pandas DataFrame containing the data.
+    """
+    return pd.read_csv(filename)
+
+def json_dataframe(filename):
+    """Read a json file and convert it to DataFrame.
+
+    Args:
+    filename: A name of an json file.
+
+    Returns:
+    A pandas DataFrame containing the data.
+    """  
+    return pd.read_json(filename)
+
 def combine_city_lists(filenames):
     """Combines multiple city lists into a single DataFrame.
 
@@ -44,23 +67,27 @@ def combine_city_lists(filenames):
     dataframes = []
     for filename in filenames:
         if filename.endswith('.json'):
-            df = pd.read_json(filename)
+            df = json_dataframe(filename)
         elif filename.endswith('.avro'):
             df = avro_dataframe(filename)
         elif filename.endswith('.csv'):
-            df = pd.read_csv(filename)
+            df = csv_dataframe(filename)
         else:
             raise ValueError("Unsupported file format: {}".format(filename))
         dataframes.append(df)
 
         combined_df = pd.concat(dataframes, ignore_index=True)
-        combined_df = combined_df.drop_duplicates(subset=['Name', 'CountryCode'])
+
+        #Note: This will remove the records that have the same values on all three columns (i.e. 'Name', 'CountryCode', and 'Population').
+        #      If we want to ensure that there are not dupplicate city name and country code, we can narrow it down to only 'Name' and 'CountryCode'.
+        #      For example: combined_df = combined_df.drop_duplicates(subset=['Name', 'CountryCode'])
+        
+        combined_df = combined_df.drop_duplicates(subset=['Name', 'CountryCode', 'Population'])
         combined_df = combined_df.sort_values(by='Name')
 
     return combined_df
 
 if __name__ == '__main__':
-    
     directory = 'DataSet'
     filenames = list_files_in_directory(directory)
     combined_df = combine_city_lists(filenames)
