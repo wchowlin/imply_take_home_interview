@@ -1,6 +1,7 @@
 import pandas as pd
 import fastavro, os
 import argparse
+from termcolor import colored
 
 def list_files_in_directory(directory):
     """Generates a list of file paths in the given directory.
@@ -91,6 +92,6 @@ if __name__ == '__main__':
     combined_df.to_csv('combined_cities.csv', index=False)
 
     # Answer the questions
-    print(f"Total rows: {combined_df.shape[0]}")
-    print(f"City with largest population: {combined_df.nlargest(1, 'Population')['Name'].values[0]} with {combined_df.nlargest(1, 'Population')['Population'].values[0]} in population")
-    print(f"Total population of cities in Brazil: {combined_df[combined_df['CountryCode'] == 'BRA']['Population'].sum()}")
+    print(colored("Total rows:","green"), f"{combined_df.shape[0]}")
+    print(colored("City with largest population:", "green"), f"{combined_df.nlargest(1, 'Population')['Name'].values[0]} with {combined_df.nlargest(1, 'Population')['Population'].values[0]} in population")
+    print(colored("Total population of cities in Brazil:","green"), f"{combined_df[combined_df['CountryCode'] == 'BRA']['Population'].sum()}")
