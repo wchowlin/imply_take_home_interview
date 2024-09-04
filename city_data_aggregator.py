@@ -77,12 +77,7 @@ def combine_city_lists(filenames):
         dataframes.append(df)
 
         combined_df = pd.concat(dataframes, ignore_index=True)
-
-        #Note: This will remove the records that have the same values on all three columns (i.e. 'Name', 'CountryCode', and 'Population').
-        #      If we want to ensure that there are not dupplicate city name and country code, we can narrow it down to only 'Name' and 'CountryCode'.
-        #      For example: combined_df = combined_df.drop_duplicates(subset=['Name', 'CountryCode'])
-        
-        combined_df = combined_df.drop_duplicates(subset=['Name', 'CountryCode', 'Population'])
+        combined_df = combined_df.drop_duplicates(subset=['Name', 'CountryCode'])
         combined_df = combined_df.sort_values(by='Name')
 
     return combined_df
