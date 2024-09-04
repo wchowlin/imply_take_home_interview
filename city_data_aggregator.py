@@ -1,6 +1,5 @@
 import pandas as pd
 import fastavro, os
-import argparse
 from termcolor import colored
 
 def list_files_in_directory(directory):
